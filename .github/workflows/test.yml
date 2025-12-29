@@ -32,7 +32,7 @@ jobs:
       run: box list --system | grep cfconfig
 
     - name: Start Server
-      run: box server start cfengine=lucee-light@${{matrix.lucee_version}} --noSaveSettings --debug
+      run: box server start cfengine=lucee-light@${{matrix.lucee_version}} port=8080 --noSaveSettings --debug
 
     - name: Test
       run: curl http://127.0.0.1:8080/index.cfm
