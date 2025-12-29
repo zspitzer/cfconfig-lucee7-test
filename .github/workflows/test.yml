@@ -1,0 +1,39 @@
+name: Test Lucee 7 CFConfig
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - lucee_version: "6"
+            java_version: "21"
+          - lucee_version: "7"
+            java_version: "21"
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up JDK
+      uses: actions/setup-java@v4
+      with:
+        java-version: "${{matrix.java_version}}"
+        distribution: "temurin"
+
+    - name: Setup CommandBox CLI
+      uses: Ortus-Solutions/setup-commandbox@main
+
+    - name: Update CFConfig for Lucee 7 support
+      run: box install cfconfig
+
+    - name: Check CFConfig version
+      run: box cfconfig version
+
+    - name: Start Server
+      run: box server start cfengine=lucee-light@${{matrix.lucee_version}} --noSaveSettings --debug
+
+    - name: Test
+      run: curl http://127.0.0.1:8080/index.cfm

@@ -1,0 +1,4 @@
+<cfoutput>
+Lucee #server.lucee.version#
+Java #server.java.version#
+</cfoutput>
