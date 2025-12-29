@@ -25,9 +25,8 @@ jobs:
 
     - name: Setup CommandBox CLI
       uses: Ortus-Solutions/setup-commandbox@main
-
-    - name: Update CFConfig for Lucee 7 support
-      run: box update commandbox-cfconfig
+      with:
+        installSystemModules: true
 
     - name: Check CFConfig version
       run: box cfconfig version
