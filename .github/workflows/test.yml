@@ -27,7 +27,7 @@ jobs:
       uses: Ortus-Solutions/setup-commandbox@main
 
     - name: Update CFConfig for Lucee 7 support
-      run: box install cfconfig
+      run: box install commandbox-cfconfig
 
     - name: Check CFConfig version
       run: box cfconfig version
